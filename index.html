@@ -40,7 +40,6 @@
     padding-bottom:60px;
   }
 
-  /* ---------- HEADER ---------- */
   .header{
     position:relative;
     background:
@@ -129,7 +128,24 @@
     font-weight:700;
   }
 
-  /* ---------- CONTROLS ---------- */
+  .config-warning{
+    max-width:640px;
+    margin:16px auto 0;
+    padding:12px 18px;
+    border-radius:12px;
+    background:#FFF3CD;
+    border:1px solid #F0C24B;
+    color:#7A5B00;
+    font-size:13px;
+    line-height:1.5;
+    display:none;
+  }
+  .config-warning code{
+    background:rgba(0,0,0,0.08);
+    padding:1px 5px;
+    border-radius:4px;
+  }
+
   .controls{
     max-width:640px;
     margin:22px auto 0;
@@ -168,7 +184,6 @@
     border-color:var(--pink-deep);
   }
 
-  /* ---------- SECTIONS ---------- */
   .section{
     max-width:640px;
     margin:34px auto 0;
@@ -195,15 +210,6 @@
     color:var(--ink-soft);
     font-weight:700;
   }
-  .section.dividir .section-head{border-bottom-color:var(--ken);}
-  .section.dividir .section-head h2{color:var(--ken-dark);}
-  .section-note{
-    font-size:13px;
-    color:var(--ink-soft);
-    margin:-6px 0 14px;
-    font-style:italic;
-    font-weight:500;
-  }
 
   .grid{
     display:grid;
@@ -214,7 +220,6 @@
     .grid{grid-template-columns:1fr 1fr;}
   }
 
-  /* ---------- CARD ---------- */
   .card{
     position:relative;
     background:var(--card);
@@ -232,7 +237,6 @@
     height:5px;
     background:linear-gradient(90deg, var(--pink), var(--gold));
   }
-  .section.dividir .card::before{background:linear-gradient(90deg, var(--ken), var(--lilac));}
   .card:hover{transform:translateY(-2px);}
   .card.reserved{opacity:.6;}
   .card .cat{
@@ -243,7 +247,6 @@
     text-transform:uppercase;
     font-weight:700;
   }
-  .section.dividir .card .cat{color:var(--ken-dark);}
   .card h3{
     font-family:'Baloo 2', sans-serif;
     font-weight:600;
@@ -262,7 +265,7 @@
     font-family:'Space Mono',monospace;
     font-weight:700;
   }
-  .section.dividir .tag{background:#DEFBF7; color:var(--ken-dark);}
+  .tag.big{background:#DEFBF7; color:var(--ken-dark);}
   .obs{
     font-size:12px;
     color:var(--ink-soft);
@@ -280,7 +283,6 @@
     margin-bottom:10px;
   }
   .link-out:hover{text-decoration:underline;}
-  .section.dividir .link-out{color:var(--ken-dark);}
   .no-link{
     font-size:12px;
     color:var(--ink-soft);
@@ -313,13 +315,11 @@
   }
   .btn:hover{filter:brightness(1.06);}
   .btn:active{transform:translateY(2px); box-shadow:0 1px 0 var(--pink-deep);}
-  .section.dividir .btn{background:linear-gradient(135deg, var(--ken), var(--ken-dark)); box-shadow:0 3px 0 var(--ken-dark);}
   .btn:disabled{opacity:.5; cursor:default;}
 
   .stamp-wrap{
     display:flex;
     align-items:center;
-    justify-content:space-between;
     gap:8px;
   }
   .stamp{
@@ -338,20 +338,6 @@
     box-shadow:0 3px 8px -2px rgba(196,0,124,0.5);
   }
   .stamp::before{content:"💗 "; }
-  .section.dividir .stamp{
-    background:linear-gradient(135deg, var(--ken), var(--ken-dark));
-    box-shadow:0 3px 8px -2px rgba(15,169,156,0.5);
-  }
-  .section.dividir .stamp::before{content:"💙 ";}
-  .undo{
-    font-size:11.5px;
-    color:var(--ink-soft);
-    background:none;
-    border:none;
-    text-decoration:underline;
-    cursor:pointer;
-    padding:0;
-  }
 
   .empty-state{
     text-align:center;
@@ -385,6 +371,9 @@
       <span class="progress-label" id="progressLabel">0/0 reservados</span>
     </div>
   </div>
+  <div class="config-warning" id="configWarning">
+    ⚠️ A planilha ainda não foi conectada. Abra o arquivo HTML, encontre a linha <code>const SHEET_API_URL</code> perto do topo do script, e cole ali a URL do seu Apps Script publicado como Web App.
+  </div>
 </div>
 
 <div class="controls">
@@ -394,123 +383,139 @@
 
 <div class="section" id="section-cha">
   <div class="section-head">
-    <h2>Para escolher</h2>
+    <h2>Itens para o Chá de Panela</h2>
     <span class="count" id="count-cha"></span>
   </div>
   <div class="grid" id="grid-cha"></div>
   <div class="empty-state" id="empty-cha" style="display:none;">Nenhum item encontrado.</div>
 </div>
 
-<div class="section dividir" id="section-dividir">
-  <div class="section-head">
-    <h2>Para dividir</h2>
-    <span class="count" id="count-dividir"></span>
-  </div>
-  <p class="section-note">Itens maiores, estilo "Kenergy em equipe" — combinem no grupo quem topa dividir antes de reservar.</p>
-  <div class="grid" id="grid-dividir"></div>
-  <div class="empty-state" id="empty-dividir" style="display:none;">Nenhum item encontrado.</div>
-</div>
-
-<p class="foot-note">Reservou por engano? É só abrir o item e tocar em "desfazer reserva".<br>Feito com muito glitter pra esse dia especial 💗</p>
+<p class="foot-note">As reservas são definitivas — assim ninguém corre o risco de perder o presente que escolheu.<br>Precisou corrigir algo? É só falar com quem está cuidando da lista.<br>Feito com muito glitter pra esse dia especial 💗</p>
 
 <script>
-const ITEMS = [
-  {id:"c1", sec:"cha", cat:"Banheiro", nome:"Saboneteira (2 unidades)", link:"https://www.mercadolivre.com.br/saboneteira-luxo-banheiro-lavabo-porta-sabonete-aco-inox-304-cor-preto-brinovar/p/MLB27619887"},
-  {id:"c2", sec:"cha", cat:"Banheiro", nome:"Kit Banheiro — suporte de shampoo", link:"https://www.mercadolivre.com.br/suporte-para-shampoo-ak-acessorios-de-parede-com-3-prateleiras-preto-em-aco-inoxidavel/p/MLB55255683"},
-  {id:"c3", sec:"cha", cat:"Banheiro", nome:"Kit Banheiro — porta-toalhas", link:"https://www.mercadolivre.com.br/kit-porta-toalhas-autoadesivo-4-pecas-preto-aco-inoxidavel-304-sem-furo-winda-gj001-b-preto/p/MLB64064437"},
-  {id:"c4", sec:"cha", cat:"Banheiro", nome:"Kit Banheiro — conjunto 6 peças bambu", link:"https://shopee.com.br/product/1531826276/22694204664?d_id=933e5&uls_trackid=55t3pn7r00d1&utm_content=3y5qo7ToxeuzSMX6rQHWyfDCMEwZ"},
-  {id:"c5", sec:"cha", cat:"Cozinha", nome:"Pano de prato", link:null},
-  {id:"c6", sec:"cha", cat:"Cozinha", nome:"Bowl Electrolux com tampa", link:"https://www.mercadolivre.com.br/electrolux-kit-bowls-tigelas-em-inox-com-tampa-plastica-3-unidades-utensilios-domesticos-de-cozinha/p/MLB25125996?pdp_filters=item_id:MLB5858734184"},
-  {id:"c7", sec:"cha", cat:"Cozinha", nome:"Garrafas de água (2 unidades)", link:"https://www.mercadolivre.com.br/garrafa-plastica-agua-suco-geladeira-18l-new-york-cor-cinza/p/MLB69916773"},
-  {id:"c8", sec:"cha", cat:"Lavanderia", nome:"Varal", link:"https://www.mercadolivre.com.br/varal-de-parede-e-muro-reforcado-suporta-ate-90-kg/up/MLBU1441102448?pdp_filters=item_id:MLB5806999124#reviews"},
-  {id:"c9", sec:"cha", cat:"Lavanderia", nome:"Varal de chão", link:"https://shopee.com.br/Varal-Dobr%C3%A1vel-e-Retr%C3%A1til-Slim-Branco-De-Ch%C3%A3o-Refor%C3%A7ado-i.318583394.27538582425?extraParams=%7B%22display_model_id%22%3A295690173130%2C%22model_selection_logic%22%3A3%7D&sp_atk=1b0c9428-c51d-4e1d-88d4-63fe4df23c80&xptdk=1b0c9428-c51d-4e1d-88d4-63fe4df23c80", cor:"Preto"},
-  {id:"c10", sec:"cha", cat:"Cozinha", nome:"Cozinhador de ovos elétrico", link:"https://www.google.com/search?q=Cozedor+De+Ovos+Port%C3%A1til+El%C3%A9trico+Cozinha+A+Vapor+110v+220v"},
-  {id:"c11", sec:"cha", cat:"Cozinha", nome:"Tábua de corte", link:"https://www.mercadolivre.com.br/tabua-de-corte-aco-inox-para-cozinha-taboa-carne-46-cm/up/MLBU3147305905?pdp_filters=item_id%3AMLB4046499719"},
-  {id:"c12", sec:"cha", cat:"Cozinha", nome:"Cubo de gelo (2 unidades)", link:"https://shopee.com.br/product/1284376448/43623471394?d_id=933e5&uls_trackid=55t4459e02k6&utm_content=3y5qo7TotoVNcXqT8RSAxB8QtTRZ"},
-  {id:"c13", sec:"cha", cat:"Cozinha", nome:"Fruteira", link:"https://www.mercadolivre.com.br/fruteira-de-mesa-organizador-de-frutas-cesto-metal-aramado-cor-preto/p/MLB29766256"},
-  {id:"c14", sec:"cha", cat:"Cozinha", nome:"Porta óleo", link:"https://shopee.com.br/product/1277093864/58260495010?d_id=933e5&uls_trackid=55t4sp6m00k8&utm_content=3y5qo7ToqgoR9fGqYyVfEyE9p2Zd"},
-  {id:"c15", sec:"cha", cat:"Cozinha", nome:"Garrafa térmica para café", link:"https://www.mercadolivre.com.br/garrafa-termica-wood-1-litro-para-cafe-cha-agua-quente--ecos/up/MLBU3864457692?pdp_filters=item_id:MLB6501234248"},
-  {id:"c16", sec:"cha", cat:"Utensílios", nome:"Kit utensílios de cozinha — 5 peças", link:"https://www.mercadolivre.com.br/jogo-de-utensilios-utility-aco-inox-5-pecas-tramontina/p/MLB25950777?pdp_filters=official_store%3A4611"},
-  {id:"c17", sec:"cha", cat:"Utensílios", nome:"Kit utensílios de cozinha — 10 peças", link:"https://www.mercadolivre.com.br/jogo-de-utensilios-tramontina-utilit-com-lminas-em-aco-inox-e-cabos-em-polipropileno-preto-10-pecas/p/MLB34285494?pdp_filters=official_store%3A4611"},
-  {id:"c18", sec:"cha", cat:"Utensílios", nome:"Espátula para fritura", link:"https://www.mercadolivre.com.br/espatula-para-fritura-tramontina-polywood-castanho-cozinha/up/MLBU3817154272"},
-  {id:"c19", sec:"cha", cat:"Utensílios", nome:"Espátula para patê (kit 4)", link:"https://www.mercadolivre.com.br/kit-4-espatulas-manteiga-pate-geleia-inox-laguna-tramontina/up/MLBU3734632529"},
-  {id:"c20", sec:"cha", cat:"Utensílios", nome:"Espremedor de alho", link:"https://www.mercadolivre.com.br/espremedor-amassador-alho-aluminio-5-util/p/MLB39105159"},
-  {id:"c21", sec:"cha", cat:"Utensílios", nome:"Kit faqueiro (10 peças)", link:"https://www.mercadolivre.com.br/jogo-de-facas-plenus-tramontina-10-pcs-lminas-de-inox-preto/p/MLB27654797?pdp_filters=item_id:MLB5520317198"},
-  {id:"c22", sec:"cha", cat:"Utensílios", nome:"Martelo de carne", link:"https://www.mercadolivre.com.br/martelo-amaciador-de-carne-batedor-pesado-bife-cor-preto-ke-home-inox/p/MLB26394586"},
-  {id:"c23", sec:"cha", cat:"Utensílios", nome:"Pegador de massa", link:"https://www.mercadolivre.com.br/pegador-de-massa-salada-tramontina-utility-aco-inox--208cm/up/MLBU3095612235"},
-  {id:"c24", sec:"cha", cat:"Cozinha", nome:"Petisqueira (tábua para queijos)", link:"https://www.mercadolivre.com.br/kit-tabua-petisqueira-grande-para-queijos-e-frios-bambu/p/MLB66003953"},
-  {id:"c25", sec:"cha", cat:"Cozinha", nome:"Porta papel toalha", link:"https://shopee.com.br/Suporte-Porta-Papel-Toalha-Em-Bambu-Multiuso-Organizador-de-Papel-i.850501874.22394090501"},
-  {id:"c26", sec:"cha", cat:"Mesa posta", nome:"Porta guardanapo", link:"https://www.mercadolivre.com.br/porta-guardanapos-coraco-toque-romntico-para-sua-mesa/p/MLB40925760"},
-  {id:"c27", sec:"cha", cat:"Cozinha", nome:"Descanso de panela (kit 4)", link:"https://www.mercadolivre.com.br/descanso-panela-e-travessa-folha-costela-de-ado-kit-4-un-g-marrom-claro-folha/p/MLB69665131"},
-  {id:"c28", sec:"cha", cat:"Bar", nome:"Balde de gelo", link:"https://www.mercadolivre.com.br/baldinho-de-gelo-inox-e-pegador-bebidas-whisky-drink-cor-metalizado/p/MLB24406061"},
-  {id:"c29", sec:"cha", cat:"Mesa posta", nome:"Taça de água 250ml (jogo 6)", link:"https://shopee.com.br/Jogo-06-Ta%C3%A7as-de-Vidro-Trabalhado-250ml-Coquetel-Drinks-i.1391584092.23393849386", cor:"Transparente"},
-  {id:"c30", sec:"cha", cat:"Cozinha", nome:"Moedor de pimenta (kit 3)", link:"https://www.mercadolivre.com.br/kit-3-moedores-de-sal-e-pimenta-vidro-100ml-manual-marca-sais/p/MLB37802707"},
-  {id:"c31", sec:"cha", cat:"Cozinha", nome:"Kit azeite (galheteiro)", link:"https://www.mercadolivre.com.br/conjunto-galheteiro-vidro-porta-azeite-vinagre-bico-dosador/up/MLBU3924686678?pdp_filters=item_id:MLB6661767290"},
-  {id:"c32", sec:"cha", cat:"Cozinha", nome:"Porta azeite spray", link:"https://www.mercadolivre.com.br/porta-azeite-vinagre-spray-vidro-500ml-azeiteirogalheteiro/p/MLB67692291"},
-  {id:"c33", sec:"cha", cat:"Mesa posta", nome:"Conjunto de copos (jogo 6)", link:"https://www.mercadolivre.com.br/jogo-6-copos-de-vidro-canelado-cameratta-versalhes-graffiato-transparente-445ml-rodrilar/p/MLB68745117"},
-  {id:"c34", sec:"cha", cat:"Utensílios", nome:"Copo medidor (jogo)", link:"https://www.mercadolivre.com.br/jogo-xicaras-colheres-copo-medidores-profissional-receitas/up/MLBU1168433759?pdp_filters=item_id:MLB967263713"},
-  {id:"c35", sec:"cha", cat:"Utensílios", nome:"Kit funil (3 peças)", link:"https://www.mercadolivre.com.br/kit-mini-funil-cozinha-e-automotivo-3-pecas-aco-inoxidavel-inox/p/MLB73558683"},
-  {id:"c36", sec:"cha", cat:"Cozinha", nome:"Kit assadeira Marinex (6 peças)", link:"https://www.mercadolivre.com.br/conjunto-assadeiras-6-pecas-de-vidro-com-tampa-cinza-marinex/p/MLB28025230"},
-  {id:"c37", sec:"cha", cat:"Mesa posta", nome:"Kit ramekin (6 peças, 210ml)", link:"https://www.mercadolivre.com.br/kit-6-ramekin-210ml-porcelana-finger-food-forno-branco/up/MLBU3873655053"},
-  {id:"c38", sec:"cha", cat:"Organização", nome:"Kit mantimento (9 peças)", link:"https://produto.mercadolivre.com.br/MLB-6655932464-potes-mantimentos-preto-9-pecas-com-potes-bowl-_JM", cor:"Preto"},
-  {id:"c39", sec:"cha", cat:"Organização", nome:"Kit de potes de vidro (5 peças)", link:"https://www.mercadolivre.com.br/kit-5-potes-de-vidro-jogo-bowls-organizador-cozinha-marmita/up/MLBU3857854890", cor:"Preto"},
-  {id:"c40", sec:"cha", cat:"Cozinha", nome:"Kit assadeira Tramontina", link:"https://www.mercadolivre.com.br/jogo-assadeira-forma-tramontina-retangular-funda-redonda/up/MLBU3510731197"},
-  {id:"c41", sec:"cha", cat:"Organização", nome:"Organizador de ovos (40 un.)", link:"https://www.mercadolivre.com.br/organizador-porta-ovos-40un-com-tampa-geladeira-cozinha-branco/p/MLB65602778"},
-  {id:"c42", sec:"cha", cat:"Mesa posta", nome:"Conjunto de xícaras de café (4 peças)", link:"https://www.mercadolivre.com.br/jogo-de-xicaras-de-cafe-porcelana-preto-oasis-4-com-pires-de-bambu-hauskraft/p/MLB62773272"},
-  {id:"c43", sec:"cha", cat:"Mesa posta", nome:"Leiteira (300ml)", link:"https://www.mercadolivre.com.br/jarra-de-porcelana-leiteira-300ml-leite-cafe-cremeira-oasis-preto/p/MLB64961601"},
-  {id:"c44", sec:"cha", cat:"Mesa posta", nome:"Saleiro (bambu/porcelana)", link:"https://www.mercadolivre.com.br/saleiro-manhattan-em-bambuporcelana-preta-290ml-hauskraft/p/MLB24578310"},
-  {id:"c45", sec:"cha", cat:"Lavanderia", nome:"Kit passadeira (3 peças)", link:"https://produto.mercadolivre.com.br/MLB-5005360644-kit-passadeira-3-pecas-grande-passadeira-2-tapetes-_JM", cor:"Neutra"},
-  {id:"c46", sec:"cha", cat:"Cozinha", nome:"Jarra de suco (1,8L)", link:"https://www.mercadolivre.com.br/jarra-vidro-borossilicato-18-litros-tampa-inox-hermetica-agua-suco-transparente/p/MLB67721503"},
-  {id:"c47", sec:"cha", cat:"Cozinha", nome:"Coador de café em aço", link:"https://www.mercadolivre.com.br/coador-de-cafe-inox-103-filtro-permanente-reutilizavel-aco/up/MLBU3968934297"},
-  {id:"c48", sec:"cha", cat:"Utensílios", nome:"Tesoura de cozinha", link:"https://www.mercadolivre.com.br/tesoura-de-cozinha-desmontavel-mundial-em-aco-inox-cor-azul/up/MLBU1711917227"},
-  {id:"c49", sec:"cha", cat:"Mesa posta", nome:"Jogo americano (kit 8)", link:"https://www.mercadolivre.com.br/8-jogo-americano-juta-azul-impermeavel-limpa-facil-pvc/p/MLB26402605", cor:"Azul"},
-  {id:"c50", sec:"cha", cat:"Organização", nome:"Potes (jogo 7, algodão)", link:"https://shopee.com.br/product/952347226/22394211970"},
-  {id:"c51", sec:"cha", cat:"Mesa posta", nome:"Conjunto de taças sobremesa (6 + bowl)", link:"https://www.mercadolivre.com.br/conjunto-6-tacas-sobremesa-250ml-e-bowl-de-vidro-raios-wolff/p/MLB38002684"},
-  {id:"c52", sec:"cha", cat:"Mesa posta", nome:"Paliteiro automático", link:"https://www.mercadolivre.com.br/caixa-de-palitos-de-dentes-automatica-porta-palito-automatico-criativo-dispenser-higinico-luxo-moderna-organizador-compacto-cozinha-porta-palitos-minimalista-gourmet-marca-ponte-lar-utilidades/p/MLB69728998"},
-  {id:"c53", sec:"cha", cat:"Utensílios", nome:"Kit escorredor (macarrão/arroz, 4 peças)", link:"https://www.mercadolivre.com.br/kit-utensilios-escorredor-macarrao-arroz-peneira-grande-4-pc/up/MLBU776592099"},
-  {id:"c54", sec:"cha", cat:"Mesa posta", nome:"Queijeira com tampa (18cm)", link:"https://www.mercadolivre.com.br/queijeira-com-tampa-mesa-posta-18cm-em-acrilico-transparente/p/MLB54969024"},
-  {id:"c55", sec:"cha", cat:"Utensílios", nome:"Abridor de lata/garrafa", link:"https://www.mercadolivre.com.br/mimo-style-abridor-de-lata-cerveja-e-garrafa-multifuncional-em-aco-inox/p/MLB25369361"},
+const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbwKinUliNmkyBq_PdQ3TurOuW8Liznx7XgNMBbxLuTNoEruyx4CKXJutDYtQ5KimPMIIA/exec";
 
-  {id:"d1", sec:"dividir", cat:"Lavanderia", nome:"Cesto de roupa triplo", link:"https://www.mercadolivre.com.br/vasagle-cesto-de-roupa-suja-triplo-com-sacos-removiveis-cor-preto-lisa/p/MLB66550583?pdp_filters=item_id%3AMLB6466362632&matt_tool=38524122&ua=-AWtJvjcITgPqa8kNOhsEpp9V4-W", cor:"Preto"},
-  {id:"d2", sec:"dividir", cat:"Cozinha", nome:"Jogo de panelas antiaderentes", link:null, cor:"Preto"},
-  {id:"d3", sec:"dividir", cat:"Cozinha", nome:"Potes de vidro (kit 3, tampa bambu)", link:"https://www.mercadolivre.com.br/3-potes-de-vidro-luxo-tampa-bambu-acucareiro-cantinho-cafe/up/MLBU3665370893?pdp_filters=item_id%3AMLB6033861980&matt_tool=38524122&ua=vNEjt8WFeuiDrp9_ceQHaLxSV_D7"},
-  {id:"d4", sec:"dividir", cat:"Lavanderia", nome:"Kit lavanderia (7 peças) — Flow", link:"https://shopee.com.br/KIT-LAVANDERIA-7-PE%C3%87AS-POTES-CESTO-E-BORRIFADORES-FLOW-ESCOLHA-SUA-COR-i.437793197.22494045033?extraParams=%7B%22display_model_id%22%3A189175757416%2C%22model_selection_logic%22%3A3%7D&sp_atk=04b0ba86-03f4-4206-8e61-6a564213e45c&xptdk=04b0ba86-03f4-4206-8e61-6a564213e45c", cor:"Cinza"},
-  {id:"d5", sec:"dividir", cat:"Lavanderia", nome:"Kit lavanderia completo — Flow", link:"https://www.ou.com.br/collections/lavanderia/products/kit-balde-bacia-e-acessorios-de-limpiza-7-pecas-ou-linha-flow?variant=47976803401949"},
-  {id:"d6", sec:"dividir", cat:"Eletro", nome:"Torradeira Electrolux Experience", link:"https://www.mercadolivre.com.br/torradeira-eletrica-electrolux-experience-ets25-cor-prateado/p/MLB22386923"},
+const ITEMS = [
+  {id:"c1", cat:"Banheiro", nome:"Saboneteira (2 unidades)", link:"https://www.mercadolivre.com.br/saboneteira-luxo-banheiro-lavabo-porta-sabonete-aco-inox-304-cor-preto-brinovar/p/MLB27619887"},
+  {id:"c2", cat:"Banheiro", nome:"Kit Banheiro — suporte de shampoo", link:"https://www.mercadolivre.com.br/suporte-para-shampoo-ak-acessorios-de-parede-com-3-prateleiras-preto-em-aco-inoxidavel/p/MLB55255683"},
+  {id:"c3", cat:"Banheiro", nome:"Kit Banheiro — porta-toalhas", link:"https://www.mercadolivre.com.br/kit-porta-toalhas-autoadesivo-4-pecas-preto-aco-inoxidavel-304-sem-furo-winda-gj001-b-preto/p/MLB64064437"},
+  {id:"c4", cat:"Banheiro", nome:"Kit Banheiro — conjunto 6 peças bambu", link:"https://shopee.com.br/product/1531826276/22694204664?d_id=933e5&uls_trackid=55t3pn7r00d1&utm_content=3y5qo7ToxeuzSMX6rQHWyfDCMEwZ"},
+  {id:"c5", cat:"Cozinha", nome:"Pano de prato", link:null},
+  {id:"c6", cat:"Cozinha", nome:"Bowl Electrolux com tampa", link:"https://www.mercadolivre.com.br/electrolux-kit-bowls-tigelas-em-inox-com-tampa-plastica-3-unidades-utensilios-domesticos-de-cozinha/p/MLB25125996?pdp_filters=item_id:MLB5858734184"},
+  {id:"c7", cat:"Cozinha", nome:"Garrafas de água (2 unidades)", link:"https://www.mercadolivre.com.br/garrafa-plastica-agua-suco-geladeira-18l-new-york-cor-cinza/p/MLB69916773"},
+  {id:"c8", cat:"Lavanderia", nome:"Varal", link:"https://www.mercadolivre.com.br/varal-de-parede-e-muro-reforcado-suporta-ate-90-kg/up/MLBU1441102448?pdp_filters=item_id:MLB5806999124#reviews"},
+  {id:"c9", cat:"Lavanderia", nome:"Varal de chão", link:"https://shopee.com.br/Varal-Dobr%C3%A1vel-e-Retr%C3%A1til-Slim-Branco-De-Ch%C3%A3o-Refor%C3%A7ado-i.318583394.27538582425?extraParams=%7B%22display_model_id%22%3A295690173130%2C%22model_selection_logic%22%3A3%7D&sp_atk=1b0c9428-c51d-4e1d-88d4-63fe4df23c80&xptdk=1b0c9428-c51d-4e1d-88d4-63fe4df23c80", cor:"Preto"},
+  {id:"c10", cat:"Cozinha", nome:"Cozinhador de ovos elétrico", link:"https://www.google.com/search?q=Cozedor+De+Ovos+Port%C3%A1til+El%C3%A9trico+Cozinha+A+Vapor+110v+220v"},
+  {id:"c11", cat:"Cozinha", nome:"Tábua de corte", link:"https://www.mercadolivre.com.br/tabua-de-corte-aco-inox-para-cozinha-taboa-carne-46-cm/up/MLBU3147305905?pdp_filters=item_id%3AMLB4046499719"},
+  {id:"c12", cat:"Cozinha", nome:"Cubo de gelo (2 unidades)", link:"https://shopee.com.br/product/1284376448/43623471394?d_id=933e5&uls_trackid=55t4459e02k6&utm_content=3y5qo7TotoVNcXqT8RSAxB8QtTRZ"},
+  {id:"c13", cat:"Cozinha", nome:"Fruteira", link:"https://www.mercadolivre.com.br/fruteira-de-mesa-organizador-de-frutas-cesto-metal-aramado-cor-preto/p/MLB29766256"},
+  {id:"c14", cat:"Cozinha", nome:"Porta óleo", link:"https://shopee.com.br/product/1277093864/58260495010?d_id=933e5&uls_trackid=55t4sp6m00k8&utm_content=3y5qo7ToqgoR9fGqYyVfEyE9p2Zd"},
+  {id:"c15", cat:"Cozinha", nome:"Garrafa térmica para café", link:"https://www.mercadolivre.com.br/garrafa-termica-wood-1-litro-para-cafe-cha-agua-quente--ecos/up/MLBU3864457692?pdp_filters=item_id:MLB6501234248"},
+  {id:"c16", cat:"Utensílios", nome:"Kit utensílios de cozinha — 5 peças", link:"https://www.mercadolivre.com.br/jogo-de-utensilios-utility-aco-inox-5-pecas-tramontina/p/MLB25950777?pdp_filters=official_store%3A4611"},
+  {id:"c17", cat:"Utensílios", nome:"Kit utensílios de cozinha — 10 peças", link:"https://www.mercadolivre.com.br/jogo-de-utensilios-tramontina-utilit-com-lminas-em-aco-inox-e-cabos-em-polipropileno-preto-10-pecas/p/MLB34285494?pdp_filters=official_store%3A4611"},
+  {id:"c18", cat:"Utensílios", nome:"Espátula para fritura", link:"https://www.mercadolivre.com.br/espatula-para-fritura-tramontina-polywood-castanho-cozinha/up/MLBU3817154272"},
+  {id:"c19", cat:"Utensílios", nome:"Espátula para patê (kit 4)", link:"https://www.mercadolivre.com.br/kit-4-espatulas-manteiga-pate-geleia-inox-laguna-tramontina/up/MLBU3734632529"},
+  {id:"c20", cat:"Utensílios", nome:"Espremedor de alho", link:"https://www.mercadolivre.com.br/espremedor-amassador-alho-aluminio-5-util/p/MLB39105159"},
+  {id:"c21", cat:"Utensílios", nome:"Kit faqueiro (10 peças)", link:"https://www.mercadolivre.com.br/jogo-de-facas-plenus-tramontina-10-pcs-lminas-de-inox-preto/p/MLB27654797?pdp_filters=item_id:MLB5520317198"},
+  {id:"c22", cat:"Utensílios", nome:"Martelo de carne", link:"https://www.mercadolivre.com.br/martelo-amaciador-de-carne-batedor-pesado-bife-cor-preto-ke-home-inox/p/MLB26394586"},
+  {id:"c23", cat:"Utensílios", nome:"Pegador de massa", link:"https://www.mercadolivre.com.br/pegador-de-massa-salada-tramontina-utility-aco-inox--208cm/up/MLBU3095612235"},
+  {id:"c24", cat:"Cozinha", nome:"Petisqueira (tábua para queijos)", link:"https://www.mercadolivre.com.br/kit-tabua-petisqueira-grande-para-queijos-e-frios-bambu/p/MLB66003953"},
+  {id:"c25", cat:"Cozinha", nome:"Porta papel toalha", link:"https://shopee.com.br/Suporte-Porta-Papel-Toalha-Em-Bambu-Multiuso-Organizador-de-Papel-i.850501874.22394090501"},
+  {id:"c26", cat:"Mesa posta", nome:"Porta guardanapo", link:"https://www.mercadolivre.com.br/porta-guardanapos-coraco-toque-romntico-para-sua-mesa/p/MLB40925760"},
+  {id:"c27", cat:"Cozinha", nome:"Descanso de panela (kit 4)", link:"https://www.mercadolivre.com.br/descanso-panela-e-travessa-folha-costela-de-ado-kit-4-un-g-marrom-claro-folha/p/MLB69665131"},
+  {id:"c28", cat:"Bar", nome:"Balde de gelo", link:"https://www.mercadolivre.com.br/baldinho-de-gelo-inox-e-pegador-bebidas-whisky-drink-cor-metalizado/p/MLB24406061"},
+  {id:"c29", cat:"Mesa posta", nome:"Taça de água 250ml (jogo 6)", link:"https://shopee.com.br/Jogo-06-Ta%C3%A7as-de-Vidro-Trabalhado-250ml-Coquetel-Drinks-i.1391584092.23393849386", cor:"Transparente"},
+  {id:"c30", cat:"Cozinha", nome:"Moedor de pimenta (kit 3)", link:"https://www.mercadolivre.com.br/kit-3-moedores-de-sal-e-pimenta-vidro-100ml-manual-marca-sais/p/MLB37802707"},
+  {id:"c31", cat:"Cozinha", nome:"Kit azeite (galheteiro)", link:"https://www.mercadolivre.com.br/conjunto-galheteiro-vidro-porta-azeite-vinagre-bico-dosador/up/MLBU3924686678?pdp_filters=item_id:MLB6661767290"},
+  {id:"c32", cat:"Cozinha", nome:"Porta azeite spray", link:"https://www.mercadolivre.com.br/porta-azeite-vinagre-spray-vidro-500ml-azeiteirogalheteiro/p/MLB67692291"},
+  {id:"c33", cat:"Mesa posta", nome:"Conjunto de copos (jogo 6)", link:"https://www.mercadolivre.com.br/jogo-6-copos-de-vidro-canelado-cameratta-versalhes-graffiato-transparente-445ml-rodrilar/p/MLB68745117"},
+  {id:"c34", cat:"Utensílios", nome:"Copo medidor (jogo)", link:"https://www.mercadolivre.com.br/jogo-xicaras-colheres-copo-medidores-profissional-receitas/up/MLBU1168433759?pdp_filters=item_id:MLB967263713"},
+  {id:"c35", cat:"Utensílios", nome:"Kit funil (3 peças)", link:"https://www.mercadolivre.com.br/kit-mini-funil-cozinha-e-automotivo-3-pecas-aco-inoxidavel-inox/p/MLB73558683"},
+  {id:"c36", cat:"Cozinha", nome:"Kit assadeira Marinex (6 peças)", link:"https://www.mercadolivre.com.br/conjunto-assadeiras-6-pecas-de-vidro-com-tampa-cinza-marinex/p/MLB28025230"},
+  {id:"c37", cat:"Mesa posta", nome:"Kit ramekin (6 peças, 210ml)", link:"https://www.mercadolivre.com.br/kit-6-ramekin-210ml-porcelana-finger-food-forno-branco/up/MLBU3873655053"},
+  {id:"c38", cat:"Organização", nome:"Kit mantimento (9 peças)", link:"https://produto.mercadolivre.com.br/MLB-6655932464-potes-mantimentos-preto-9-pecas-com-potes-bowl-_JM", cor:"Preto"},
+  {id:"c39", cat:"Organização", nome:"Kit de potes de vidro (5 peças)", link:"https://www.mercadolivre.com.br/kit-5-potes-de-vidro-jogo-bowls-organizador-cozinha-marmita/up/MLBU3857854890", cor:"Preto"},
+  {id:"c40", cat:"Cozinha", nome:"Kit assadeira Tramontina", link:"https://www.mercadolivre.com.br/jogo-assadeira-forma-tramontina-retangular-funda-redonda/up/MLBU3510731197"},
+  {id:"c41", cat:"Organização", nome:"Organizador de ovos (40 un.)", link:"https://www.mercadolivre.com.br/organizador-porta-ovos-40un-com-tampa-geladeira-cozinha-branco/p/MLB65602778"},
+  {id:"c42", cat:"Mesa posta", nome:"Conjunto de xícaras de café (4 peças)", link:"https://www.mercadolivre.com.br/jogo-de-xicaras-de-cafe-porcelana-preto-oasis-4-com-pires-de-bambu-hauskraft/p/MLB62773272"},
+  {id:"c43", cat:"Mesa posta", nome:"Leiteira (300ml)", link:"https://www.mercadolivre.com.br/jarra-de-porcelana-leiteira-300ml-leite-cafe-cremeira-oasis-preto/p/MLB64961601"},
+  {id:"c44", cat:"Mesa posta", nome:"Saleiro (bambu/porcelana)", link:"https://www.mercadolivre.com.br/saleiro-manhattan-em-bambuporcelana-preta-290ml-hauskraft/p/MLB24578310"},
+  {id:"c45", cat:"Lavanderia", nome:"Kit passadeira (3 peças)", link:"https://produto.mercadolivre.com.br/MLB-5005360644-kit-passadeira-3-pecas-grande-passadeira-2-tapetes-_JM", cor:"Neutra"},
+  {id:"c46", cat:"Cozinha", nome:"Jarra de suco (1,8L)", link:"https://www.mercadolivre.com.br/jarra-vidro-borossilicato-18-litros-tampa-inox-hermetica-agua-suco-transparente/p/MLB67721503"},
+  {id:"c47", cat:"Cozinha", nome:"Coador de café em aço", link:"https://www.mercadolivre.com.br/coador-de-cafe-inox-103-filtro-permanente-reutilizavel-aco/up/MLBU3968934297"},
+  {id:"c48", cat:"Utensílios", nome:"Tesoura de cozinha", link:"https://www.mercadolivre.com.br/tesoura-de-cozinha-desmontavel-mundial-em-aco-inox-cor-azul/up/MLBU1711917227"},
+  {id:"c49", cat:"Mesa posta", nome:"Jogo americano (kit 8)", link:"https://www.mercadolivre.com.br/8-jogo-americano-juta-azul-impermeavel-limpa-facil-pvc/p/MLB26402605", cor:"Azul"},
+  {id:"c50", cat:"Organização", nome:"Potes (jogo 7, algodão)", link:"https://shopee.com.br/product/952347226/22394211970"},
+  {id:"c51", cat:"Mesa posta", nome:"Conjunto de taças sobremesa (6 + bowl)", link:"https://www.mercadolivre.com.br/conjunto-6-tacas-sobremesa-250ml-e-bowl-de-vidro-raios-wolff/p/MLB38002684"},
+  {id:"c52", cat:"Mesa posta", nome:"Paliteiro automático", link:"https://www.mercadolivre.com.br/caixa-de-palitos-de-dentes-automatica-porta-palito-automatico-criativo-dispenser-higinico-luxo-moderna-organizador-compacto-cozinha-porta-palitos-minimalista-gourmet-marca-ponte-lar-utilidades/p/MLB69728998"},
+  {id:"c53", cat:"Utensílios", nome:"Kit escorredor (macarrão/arroz, 4 peças)", link:"https://www.mercadolivre.com.br/kit-utensilios-escorredor-macarrao-arroz-peneira-grande-4-pc/up/MLBU776592099"},
+  {id:"c54", cat:"Mesa posta", nome:"Queijeira com tampa (18cm)", link:"https://www.mercadolivre.com.br/queijeira-com-tampa-mesa-posta-18cm-em-acrilico-transparente/p/MLB54969024"},
+  {id:"c55", cat:"Utensílios", nome:"Abridor de lata/garrafa", link:"https://www.mercadolivre.com.br/mimo-style-abridor-de-lata-cerveja-e-garrafa-multifuncional-em-aco-inox/p/MLB25369361"},
+
+  {id:"d1", big:true, cat:"Lavanderia", nome:"Cesto de roupa triplo", link:"https://www.mercadolivre.com.br/vasagle-cesto-de-roupa-suja-triplo-com-sacos-removiveis-cor-preto-lisa/p/MLB66550583?pdp_filters=item_id%3AMLB6466362632&matt_tool=38524122&ua=-AWtJvjcITgPqa8kNOhsEpp9V4-W", cor:"Preto"},
+  {id:"d2", big:true, cat:"Cozinha", nome:"Jogo de panelas antiaderentes", link:null, cor:"Preto"},
+  {id:"d3", big:true, cat:"Cozinha", nome:"Potes de vidro (kit 3, tampa bambu)", link:"https://www.mercadolivre.com.br/3-potes-de-vidro-luxo-tampa-bambu-acucareiro-cantinho-cafe/up/MLBU3665370893?pdp_filters=item_id%3AMLB6033861980&matt_tool=38524122&ua=vNEjt8WFeuiDrp9_ceQHaLxSV_D7"},
+  {id:"d4", big:true, cat:"Lavanderia", nome:"Kit lavanderia (7 peças) — Flow", link:"https://shopee.com.br/KIT-LAVANDERIA-7-PE%C3%87AS-POTES-CESTO-E-BORRIFADORES-FLOW-ESCOLHA-SUA-COR-i.437793197.22494045033?extraParams=%7B%22display_model_id%22%3A189175757416%2C%22model_selection_logic%22%3A3%7D&sp_atk=04b0ba86-03f4-4206-8e61-6a564213e45c&xptdk=04b0ba86-03f4-4206-8e61-6a564213e45c", cor:"Cinza"},
+  {id:"d5", big:true, cat:"Lavanderia", nome:"Kit lavanderia completo — Flow", link:"https://www.ou.com.br/collections/lavanderia/products/kit-balde-bacia-e-acessorios-de-limpiza-7-pecas-ou-linha-flow?variant=47976803401949"},
+  {id:"d6", big:true, cat:"Eletro", nome:"Torradeira Electrolux Experience", link:"https://www.mercadolivre.com.br/torradeira-eletrica-electrolux-experience-ets25-cor-prateado/p/MLB22386923"},
 ];
 
 let state = {};
 let showOnlyAvailable = false;
+let syncing = false;
+
+function isConfigured(){
+  return SHEET_API_URL && SHEET_API_URL.indexOf("COLE_AQUI") === -1;
+}
 
 async function loadState(){
+  if(!isConfigured()){
+    document.getElementById('configWarning').style.display = 'block';
+    render();
+    return;
+  }
   try{
-    const res = await window.storage.get('cha-panela-status', true);
-    state = res && res.value ? JSON.parse(res.value) : {};
+    const res = await fetch(SHEET_API_URL, {method:'GET'});
+    const data = await res.json();
+    state = data || {};
   }catch(e){
-    state = {};
+    console.error('Falha ao carregar reservas', e);
   }
   render();
 }
 
-async function saveState(){
-  try{
-    await window.storage.set('cha-panela-status', JSON.stringify(state), true);
-  }catch(e){
-    console.error('Falha ao salvar', e);
-  }
-}
-
-function reserve(id, nome){
+async function reserve(id, nome, itemNome){
   if(!nome || !nome.trim()) return;
-  state[id] = {reserved:true, nome:nome.trim()};
-  saveState();
-  render();
-}
+  if(!isConfigured()){
+    alert('A planilha ainda não foi conectada. Configure a SHEET_API_URL no código antes de usar.');
+    return;
+  }
+  if(syncing) return;
+  syncing = true;
+  const btn = document.getElementById('btn-'+id);
+  if(btn){ btn.disabled = true; btn.textContent = 'Salvando...'; }
 
-function unreserve(id){
-  delete state[id];
-  saveState();
-  render();
+  try{
+    const res = await fetch(SHEET_API_URL, {
+      method:'POST',
+      body: new URLSearchParams({ itemId: id, nome: nome.trim(), itemNome: itemNome || '' })
+    });
+    const data = await res.json();
+    if(data && data.ok){
+      state[id] = {reserved:true, nome: nome.trim()};
+      render();
+    }else if(data && data.error === 'already_reserved'){
+      alert('Ih, alguém acabou de reservar esse item antes de você! Atualizando a lista...');
+      await loadState();
+    }else{
+      alert('Não deu pra salvar a reserva agora. Tenta de novo em alguns segundos.');
+    }
+  }catch(e){
+    console.error(e);
+    alert('Não deu pra salvar a reserva agora. Verifique sua conexão e tente de novo.');
+  }finally{
+    syncing = false;
+  }
 }
 
 function cardHTML(item){
@@ -518,6 +523,7 @@ function cardHTML(item){
   const isReserved = !!(rec && rec.reserved);
   let tags = '';
   if(item.cor) tags += `<span class="tag">Cor: ${item.cor}</span>`;
+  if(item.big) tags += `<span class="tag big">💰 vale dividir</span>`;
   const obs = item.obs ? `<p class="obs">${item.obs}</p>` : '';
   const linkHTML = item.link
     ? `<a class="link-out" href="${item.link}" target="_blank" rel="noopener">Ver sugestão ↗</a>`
@@ -526,11 +532,10 @@ function cardHTML(item){
   const footer = isReserved
     ? `<div class="stamp-wrap">
          <span class="stamp">Reservado — ${escapeHTML(rec.nome)}</span>
-         <button class="undo" onclick="unreserve('${item.id}')">desfazer</button>
        </div>`
     : `<div class="claim-row">
          <input type="text" id="name-${item.id}" placeholder="Seu nome" maxlength="40">
-         <button class="btn" onclick="handleReserve('${item.id}')">Reservar</button>
+         <button class="btn" id="btn-${item.id}" onclick="handleReserve('${item.id}')">Reservar</button>
        </div>`;
 
   return `<div class="card ${isReserved ? 'reserved':''}" data-name="${item.nome.toLowerCase()}" data-reserved="${isReserved}">
@@ -551,35 +556,20 @@ function escapeHTML(str){
 
 function handleReserve(id){
   const input = document.getElementById('name-'+id);
-  reserve(id, input.value);
+  const item = ITEMS.find(i => i.id === id);
+  reserve(id, input.value, item ? item.nome : '');
 }
 
 function render(){
   const query = document.getElementById('searchInput').value.trim().toLowerCase();
 
-  const cha = ITEMS.filter(i => i.sec === 'cha');
-  const dividir = ITEMS.filter(i => i.sec === 'dividir');
-
-  renderGrid('grid-cha','empty-cha','count-cha', cha, query);
-  renderGrid('grid-dividir','empty-dividir','count-dividir', dividir, query);
-
-  const total = ITEMS.length;
-  const reservedCount = Object.values(state).filter(v => v && v.reserved).length;
-  document.getElementById('progressFill').style.width = (total? (reservedCount/total*100):0) + '%';
-  document.getElementById('progressLabel').textContent = `${reservedCount}/${total} reservados`;
-}
-
-function renderGrid(gridId, emptyId, countId, items, query){
-  const grid = document.getElementById(gridId);
-  const emptyEl = document.getElementById(emptyId);
-
-  let filtered = items.filter(i => i.nome.toLowerCase().includes(query) || i.cat.toLowerCase().includes(query));
+  let filtered = ITEMS.filter(i => i.nome.toLowerCase().includes(query) || i.cat.toLowerCase().includes(query));
   if(showOnlyAvailable){
     filtered = filtered.filter(i => !(state[i.id] && state[i.id].reserved));
   }
 
-  const reservedInSection = items.filter(i => state[i.id] && state[i.id].reserved).length;
-  document.getElementById(countId).textContent = `${items.length - reservedInSection}/${items.length} disponíveis`;
+  const grid = document.getElementById('grid-cha');
+  const emptyEl = document.getElementById('empty-cha');
 
   if(filtered.length === 0){
     grid.innerHTML = '';
@@ -588,6 +578,13 @@ function renderGrid(gridId, emptyId, countId, items, query){
     emptyEl.style.display = 'none';
     grid.innerHTML = filtered.map(cardHTML).join('');
   }
+
+  const reservedInSection = ITEMS.filter(i => state[i.id] && state[i.id].reserved).length;
+  document.getElementById('count-cha').textContent = `${ITEMS.length - reservedInSection}/${ITEMS.length} disponíveis`;
+
+  const total = ITEMS.length;
+  document.getElementById('progressFill').style.width = (total? (reservedInSection/total*100):0) + '%';
+  document.getElementById('progressLabel').textContent = `${reservedInSection}/${total} reservados`;
 }
 
 document.getElementById('searchInput').addEventListener('input', render);
